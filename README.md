@@ -39,54 +39,11 @@ Click the import buttons above to automatically add these blueprints to your Hom
 
 ### Prerequisites
 - Home Assistant with blueprint support
-- [keyboard_remote integration](https://github.com/bendavid/keyboard_remote) installed and configured
+- [keyboard_remote integration](https://www.home-assistant.io/integrations/keyboard_remote/) installed and configured
 
-## 📁 Repository Structure
-
-```
-ha/
-├── blueprints/
-│   ├── numeric-keyboard/     # Numeric keypad/calculator remote
-│   │   ├── keypad.yaml      # Blueprint file
-│   │   ├── README.md        # Detailed documentation
-│   │   └── keypad.jpg       # Key layout reference
-│   └── xp-pen/              # XP-Pen ACK05 remote
-│       ├── xp-pen-ack05.yaml    # Blueprint file
-│       ├── README.md            # Detailed documentation
-│       └── XPPEN-ACK05-Keys.png # Key layout reference
-└── README.md                # This file
-```
 
 ## 🔮 Future Plans
 
-This repository is designed to be a comprehensive collection of useful Home Assistant resources. Coming soon:
+This repository is designed to be a collection of useful Home Assistant resources.
 
-- 🎛️ **Additional Device Blueprints**: Support for more remote controls and input devices
-- 🤖 **Advanced Automations**: Complex multi-device automation examples
-- 🎭 **Scene Collections**: Pre-built scenes for common scenarios
-- 🔧 **Utility Scripts**: Helper scripts for device setup and troubleshooting
-- 📊 **Dashboard Cards**: Custom Lovelace cards and configurations
-- 🏠 **Integration Guides**: Step-by-step guides for popular integrations
 
-## 🤝 Contributing
-
-Have a useful Home Assistant blueprint, automation, or utility to share? Contributions are welcome!
-
-1. Fork this repository
-2. Create a feature branch
-3. Add your contribution with proper documentation
-4. Submit a pull request
-
-## 📝 License
-
-This project is open source. Feel free to use, modify, and distribute these blueprints and utilities.
-
-## 🆘 Support
-
-- 📖 Check the individual blueprint README files for detailed setup instructions
-- 💬 Open an issue if you encounter problems or have suggestions
-- 📺 Watch the referenced video guides for visual setup instructions
-
----
-
-*Happy automating! 🏠✨*

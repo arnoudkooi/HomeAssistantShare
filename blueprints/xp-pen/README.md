@@ -4,7 +4,7 @@ A modern Home Assistant blueprint that enables full control of XP-Pen ACK05 remo
 
 [![Open your Home Assistant instance and show the blueprint import dialog with a specific blueprint pre-filled.](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A//raw.githubusercontent.com/arnoudkooi/HomeAssistantShare/main/blueprints/xp-pen/xp-pen-ack05.yaml)
 
-![XP-Pen ACK05 Key Layout](XPPEN-ACK05-Keys.png)
+<img src="XPPEN-ACK05-Keys.png" alt="XP-Pen ACK05 Key Layout" width="300">
 
 ## End Result
 

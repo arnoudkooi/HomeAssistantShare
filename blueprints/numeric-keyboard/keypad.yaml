@@ -4,7 +4,7 @@ blueprint:
     Run a different action for each key on your Shortcut Remote.  
     Leave any action blank to skip it.
     
-    ![Numeric Keypad Layout](https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/scripts/bleuprints/numeric-keyboard/keypad.jpg)
+    ![Numeric Keypad Layout](https://raw.githubusercontent.com/arnoudkooi/HomeAssistantShare/main/blueprints/numeric-keyboard/keypad.jpg)
     
     📖 **Full Documentation & Setup Guide**: [README.md](https://github.com/YOUR_USERNAME/YOUR_REPO/blob/main/scripts/bleuprints/numeric-keyboard/README.md)
   domain: automation
