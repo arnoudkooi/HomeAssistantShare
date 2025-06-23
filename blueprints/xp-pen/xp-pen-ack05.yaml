@@ -7,7 +7,7 @@ blueprint:
     
     ![XP-Pen ACK05 Key Layout](https://raw.githubusercontent.com/arnoudkooi/HomeAssistantShare/main/blueprints/xp-pen/XPPEN-ACK05-Keys.png)
     
-    📖 **Full Documentation & Setup Guide**: [README.md](https://github.com/YOUR_USERNAME/YOUR_REPO/blob/main/README.md)
+    📖 **Full Documentation & Setup Guide**: [README.md](https://github.com/arnoudkooi/HomeAssistantShare/blob/main/blueprints/xp-pen/README.md)
     
     To debounce the events, an input_text entity is needed. 
     Suggested to name it "XP-Pen Remote State"

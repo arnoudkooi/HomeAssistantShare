@@ -6,7 +6,7 @@ blueprint:
     
     ![Numeric Keypad Layout](https://raw.githubusercontent.com/arnoudkooi/HomeAssistantShare/main/blueprints/numeric-keyboard/keypad.jpg)
     
-    📖 **Full Documentation & Setup Guide**: [README.md](https://github.com/YOUR_USERNAME/YOUR_REPO/blob/main/scripts/bleuprints/numeric-keyboard/README.md)
+    📖 **Full Documentation & Setup Guide**: [README.md](https://github.com/arnoudkooi/HomeAssistantShare/blob/main/blueprints/numeric-keyboard/README.md)
   domain: automation
   input:
     device_descriptor:
