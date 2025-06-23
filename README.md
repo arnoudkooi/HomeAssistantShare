@@ -13,7 +13,7 @@ Transform any numeric keypad or calculator into a powerful Home Assistant remote
 - ✅ Simple configuration with no complex sequences
 - ✅ Works with USB and Bluetooth keypads
 
-### 🔢 [Details](./blueprints/numeric-keyboard/readme.md)
+## [Details](./blueprints/numeric-keyboard/)
 
 ### 🎨 [XP-Pen ACK05 Remote Control](./blueprints/xp-pen/)
 Professional remote control for XP-Pen ACK05 devices with support for complex multi-key sequences and rotary knob control.
@@ -24,7 +24,7 @@ Professional remote control for XP-Pen ACK05 devices with support for complex mu
 - ✅ Orientation support (landscape and portrait modes)
 - ✅ State management for reliable operation
 
-### 🎨 [Details](./blueprints/xp-pen/readme.md)
+## [Details](./blueprints/xp-pen/)
 
 ## 🚀 Getting Started
 
