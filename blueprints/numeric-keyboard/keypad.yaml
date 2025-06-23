@@ -1,0 +1,364 @@
+blueprint:
+  name: Shortcut Remote – Actions per Key
+  description: >
+    Run a different action for each key on your Shortcut Remote.  
+    Leave any action blank to skip it.
+    
+    ![Numeric Keypad Layout](https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/scripts/bleuprints/numeric-keyboard/keypad.jpg)
+    
+    📖 **Full Documentation & Setup Guide**: [README.md](https://github.com/YOUR_USERNAME/YOUR_REPO/blob/main/scripts/bleuprints/numeric-keyboard/README.md)
+  domain: automation
+  input:
+    device_descriptor:
+      name: Device descriptor
+      description: The `/dev/input/event..` path of your Shortcut Remote.
+      selector:
+        text:
+
+    calculator_action:
+      name: Calculator key action
+      description: Action to run when Calculator is pressed (key_code 140)
+      selector:
+        action:
+      default: []
+
+    escape_action:
+      name: Escape key action
+      description: Action to run when Escape is pressed (key_code 1)
+      selector:
+        action:
+      default: []
+
+    backspace_action:
+      name: Backspace key action
+      description: Action to run when Backspace is pressed (key_code 14)
+      selector:
+        action:
+      default: []
+
+    equals_action:
+      name: “=” key action
+      description: Action to run when “=” is pressed (key_code 117)
+      selector:
+        action:
+      default: []
+
+    slash_action:
+      name: “/” key action
+      description: Action to run when “/” is pressed (key_code 98)
+      selector:
+        action:
+      default: []
+
+    star_action:
+      name: “*” key action
+      description: Action to run when “*” is pressed (key_code 55)
+      selector:
+        action:
+      default: []
+
+    zero_action:
+      name: “0” key action
+      description: Action to run when “0” is pressed (key_code 82)
+      selector:
+        action:
+      default: []
+
+    one_action:
+      name: “1” key action
+      description: Action to run when “1” is pressed (key_code 79)
+      selector:
+        action:
+      default: []
+
+    two_action:
+      name: “2” key action
+      description: Action to run when “2” is pressed (key_code 80)
+      selector:
+        action:
+      default: []
+
+    three_action:
+      name: “3” key action
+      description: Action to run when “3” is pressed (key_code 81)
+      selector:
+        action:
+      default: []
+
+    four_action:
+      name: “4” key action
+      description: Action to run when “4” is pressed (key_code 75)
+      selector:
+        action:
+      default: []
+
+    five_action:
+      name: “5” key action
+      description: Action to run when “5” is pressed (key_code 76)
+      selector:
+        action:
+      default: []
+
+    six_action:
+      name: “6” key action
+      description: Action to run when “6” is pressed (key_code 77)
+      selector:
+        action:
+      default: []
+
+    seven_action:
+      name: “7” key action
+      description: Action to run when “7” is pressed (key_code 71)
+      selector:
+        action:
+      default: []
+
+    eight_action:
+      name: “8” key action
+      description: Action to run when “8” is pressed (key_code 72)
+      selector:
+        action:
+      default: []
+
+    nine_action:
+      name: “9” key action
+      description: Action to run when “9” is pressed (key_code 73)
+      selector:
+        action:
+      default: []
+
+    minus_action:
+      name: “-” key action
+      description: Action to run when “-” is pressed (key_code 74)
+      selector:
+        action:
+      default: []
+
+    plus_action:
+      name: “+” key action
+      description: Action to run when “+” is pressed (key_code 78)
+      selector:
+        action:
+      default: []
+
+    enter_action:
+      name: Enter key action
+      description: Action to run when Enter is pressed (key_code 96)
+      selector:
+        action:
+      default: []
+
+trigger:
+  - id: calculator
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 140
+
+  - id: escape
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 1
+
+  - id: backspace
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 14
+
+  - id: equals
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 117
+
+  - id: slash
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 98
+
+  - id: star
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 55
+
+  - id: zero
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 82
+
+  - id: one
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 79
+
+  - id: two
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 80
+
+  - id: three
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 81
+
+  - id: four
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 75
+
+  - id: five
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 76
+
+  - id: six
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 77
+
+  - id: seven
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 71
+
+  - id: eight
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 72
+
+  - id: nine
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 73
+
+  - id: minus
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 74
+
+  - id: plus
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 78
+
+  - id: enter
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 96
+
+action:
+  - choose:
+      - conditions:
+          - "{{ trigger.id == 'calculator' }}"
+        sequence: !input calculator_action
+      - conditions:
+          - "{{ trigger.id == 'escape' }}"
+        sequence: !input escape_action
+      - conditions:
+          - "{{ trigger.id == 'backspace' }}"
+        sequence: !input backspace_action
+      - conditions:
+          - "{{ trigger.id == 'equals' }}"
+        sequence: !input equals_action
+      - conditions:
+          - "{{ trigger.id == 'slash' }}"
+        sequence: !input slash_action
+      - conditions:
+          - "{{ trigger.id == 'star' }}"
+        sequence: !input star_action
+      - conditions:
+          - "{{ trigger.id == 'zero' }}"
+        sequence: !input zero_action
+      - conditions:
+          - "{{ trigger.id == 'one' }}"
+        sequence: !input one_action
+      - conditions:
+          - "{{ trigger.id == 'two' }}"
+        sequence: !input two_action
+      - conditions:
+          - "{{ trigger.id == 'three' }}"
+        sequence: !input three_action
+      - conditions:
+          - "{{ trigger.id == 'four' }}"
+        sequence: !input four_action
+      - conditions:
+          - "{{ trigger.id == 'five' }}"
+        sequence: !input five_action
+      - conditions:
+          - "{{ trigger.id == 'six' }}"
+        sequence: !input six_action
+      - conditions:
+          - "{{ trigger.id == 'seven' }}"
+        sequence: !input seven_action
+      - conditions:
+          - "{{ trigger.id == 'eight' }}"
+        sequence: !input eight_action
+      - conditions:
+          - "{{ trigger.id == 'nine' }}"
+        sequence: !input nine_action
+      - conditions:
+          - "{{ trigger.id == 'minus' }}"
+        sequence: !input minus_action
+      - conditions:
+          - "{{ trigger.id == 'plus' }}"
+        sequence: !input plus_action
+      - conditions:
+          - "{{ trigger.id == 'enter' }}"
+        sequence: !input enter_action
+    default: []
+mode: single

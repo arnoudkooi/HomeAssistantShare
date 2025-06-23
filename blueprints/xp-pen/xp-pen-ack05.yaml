@@ -1,0 +1,214 @@
+blueprint:
+  name: XP-Pen Remote – Complex Key Sequences
+  description: >
+    A modern blueprint for XP-Pen ACK05remotes with multi-key sequences.
+    Handles both single key presses and complex key sequences reliably.
+    Uses an input_text helper to prevent double triggers and manage state.
+    
+    ![XP-Pen ACK05 Key Layout](https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/XPPEN-ACK05-Keys.png)
+    
+    📖 **Full Documentation & Setup Guide**: [README.md](https://github.com/YOUR_USERNAME/YOUR_REPO/blob/main/README.md)
+    
+    To debounce the events, an input_text entity is needed. 
+    Suggested to name it "XP-Pen Remote State"
+
+  domain: automation
+
+  input:
+    device_descriptor:
+      name: "Device descriptor"
+      description: "The `/dev/input/event..` path of your XP-Pen Remote."
+      selector:
+        text:
+    
+    xp_pen_remote_state:
+      name: "XP-Pen Remote State"
+      description: "input_text entity to store remote state and event history"
+      selector:
+        entity:
+          domain: input_text
+
+    # One action slot for each key/sequence
+
+    K1_action:
+      name: "K1 - Landscape: first row first key"
+      description: "Key codes 29→24 - Portrait: first row third key"
+      selector: { action: {} }
+      default: []
+    K2_action:
+      name: "K2 - Landscape: first row second key"
+      description: "Key codes 29→49 - Portrait: second row third key"
+      selector: { action: {} }
+      default: []
+    K3_action:
+      name: "K3 - Landscape: first row third key"
+      description: "Key code 63 - Portrait: third row third key"
+      selector: { action: {} }
+      default: []
+    K4_action:
+      name: "K4 - Landscape: second row first key"
+      description: "Key code 42 - Portrait: first row second key"
+      selector: { action: {} }
+      default: []
+    K5_action:
+      name: "K5 - Landscape: second row second key"
+      description: "Key code 29 (standalone) - Portrait: second row second key"
+      selector: { action: {} }
+      default: []
+    K6_action:
+      name: "K6 - Landscape: second row third key"
+      description: "Key code 56 - Portrait: third row second key"
+      selector: { action: {} }
+      default: []
+    K7_action:
+      name: "K7 - Landscape: first row fourth key (double)"
+      description: "Key codes 29→31 - Portrait: first row first key (double height)"
+      selector: { action: {} }
+      default: []
+    K8_action:
+      name: "K8 - Landscape: third row first key"
+      description: "Key codes 29→44 - Portrait: first row fourth key"
+      selector: { action: {} }
+      default: []
+    K9_action:
+      name: "K9 - Landscape: third row second key (double)"
+      description: "Key code 57 - Portrait: second row first key (double width)"
+      selector: { action: {} }
+      default: []
+    K10_action:
+      name: "K10 - Landscape: third row third key"
+      description: "Key codes 29→42→44 - Portrait: third row first key"
+      selector: { action: {} }
+      default: []
+
+    rotate_cw_action:
+      name: "Rotate Knob CW - Clockwise rotation"
+      description: "Key codes 29→74"
+      selector: { action: {} }
+      default: []
+    rotate_ccw_action:
+      name: "Rotate Knob CCW - Counter-clockwise rotation"
+      description: "Key codes 29→78"
+      selector: { action: {} }
+      default: []
+
+mode: parallel
+max_exceeded: silent
+
+trigger:
+  - platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+
+action:
+  - variables:
+      now: "{{ now() | as_timestamp }}"
+      key_code: "{{ trigger.event.data.key_code | int }}"
+      xp_pen_remote_state: !input xp_pen_remote_state
+      # Load state, fallback to empty
+      state: >-
+        {% set t = states[xp_pen_remote_state].state %}
+        {% if t in ['unknown', 'unavailable', None, ''] %}
+          {"timestamp": 0, "sequence": [], "last_key": null}
+        {% else %}
+          {{ t | from_json }}
+        {% endif %}
+      # Check if this is a continuation of a sequence (within 100ms)
+      is_sequence_continuation: >-
+        {{ (now - (state.timestamp | default(0))) < 0.1 }}
+      # Build current sequence
+      current_sequence: >-
+        {% if is_sequence_continuation %}
+          {{ (state.sequence | default([])) + [key_code] }}
+        {% else %}
+          {{ [key_code] }}
+        {% endif %}
+      # Convert sequence to string for matching
+      sequence_str: "{{ current_sequence | join(',') }}"
+
+
+
+  # Update state
+  - service: input_text.set_value
+    target:
+      entity_id: !input xp_pen_remote_state
+    data:
+      value: >-
+        {{ {
+          "timestamp": now,
+          "sequence": current_sequence,
+          "last_key": key_code
+        } | to_json | string }}
+
+  # Wait a bit to see if more keys are coming for multi-key sequences
+  - delay: "00:00:00.08"
+
+  # Re-read state to get the final sequence
+  - variables:
+      final_state: >-
+        {% set t = states[xp_pen_remote_state].state %}
+        {{ t | from_json }}
+      final_sequence: "{{ final_state.sequence | join(',') }}"
+      # Only execute if this is the last key in the sequence (no newer keys arrived)
+      should_execute: >-
+        {{ final_state.last_key == key_code and 
+           (now - final_state.timestamp) < 0.15 }}
+
+
+  # Execute action based on final sequence
+  - choose:
+      # Three-key sequence
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '29,42,44' }}"
+        sequence: !input K10_action
+      
+      # Two-key sequences starting with 29
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '29,74' }}"
+        sequence: !input rotate_cw_action
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '29,78' }}"
+        sequence: !input rotate_ccw_action
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '29,24' }}"
+        sequence: !input K1_action
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '29,49' }}"
+        sequence: !input K2_action
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '29,31' }}"
+        sequence: !input K7_action
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '29,44' }}"
+        sequence: !input K8_action
+      
+      # Single key presses
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '29' }}"
+        sequence: !input K5_action
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '42' }}"
+        sequence: !input K4_action
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '56' }}"
+        sequence: !input K6_action
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '57' }}"
+        sequence: !input K9_action
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '63' }}"
+        sequence: !input K3_action
