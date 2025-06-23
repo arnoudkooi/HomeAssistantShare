@@ -78,7 +78,7 @@ If you're using a Bluetooth numeric keypad, you'll need to pair it manually via 
 - **Keys not working**: Restart Home Assistant after successful pairing
 - **Connection drops**: Some keypads have power-saving modes that disconnect
 
-📺 **Detailed Video Guide**: For a comprehensive walkthrough of Bluetooth pairing in Home Assistant, see: [https://www.youtube.com/watch?v=YV0DFPBQbWQ&t](https://www.youtube.com/watch?v=YV0DFPBQbWQ&t)
+📺 **Detailed Video Guide**: For a fun and informative guide about the keyboard_remote integration that inspired me check Paul Hibbert's video, see: [https://www.youtube.com/watch?v=YV0DFPBQbWQ&t](https://www.youtube.com/watch?v=YV0DFPBQbWQ&t)
 
 ## Installation
 

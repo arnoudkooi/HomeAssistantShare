@@ -32,7 +32,7 @@ This setup transforms the XP-Pen ACK05 into a simplified TV remote with printed 
 3. **keyboard_remote integration** installed and configured
 4. **Input Text Helper** entity for state management
 
-📺 **Detailed Video Guide**: For a comprehensive walkthrough of the keyboard_remote integration in Home Assistant, see: [https://www.youtube.com/watch?v=YV0DFPBQbWQ&t](https://www.youtube.com/watch?v=YV0DFPBQbWQ&t)
+📺 **Detailed Video Guide**: For a fun and informative guide about the keyboard_remote integration that inspired me check Paul Hibbert's video, see: [https://www.youtube.com/watch?v=YV0DFPBQbWQ&t](https://www.youtube.com/watch?v=YV0DFPBQbWQ&t)
 
 ### Bluetooth XP-Pen Setup (Optional)
 
