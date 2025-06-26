@@ -1,0 +1,329 @@
+blueprint:
+  name: 8BitDo Micro
+  description: >
+    Run a different action for each button on your 8BitDo Micro gamepad.  
+    Leave any action blank to skip it.
+    
+    ![8BitDo Micro Layout](https://raw.githubusercontent.com/arnoudkooi/HomeAssistantShare/main/blueprints/8bitdomicro/8bitdomicro.png)
+    
+    The variable `{{ pressed_key }}` will be set to the logical name of the pressed button (e.g., "A", "B", "L2", etc.) for easy mapping to i.e. remote keyboard operations in your automations.
+    > **Note:** The ⭐ is default to null, I have remapped this to the space bar (key code 57) in the Ultimate Software app on a mobile device.
+
+    
+    **Full Documentation & Setup Guide**: [README.md](https://github.com/arnoudkooi/HomeAssistantShare/blob/main/blueprints/8bitdomicro/README.md)
+  domain: automation
+  input:
+    device_descriptor:
+      name: Device descriptor
+      description: The `/dev/input/event..` path of your 8BitDo Micro.
+      selector:
+        text:
+    any_key_action:
+      name: Any key action
+      description: Action to run on any key press (the '{{ trigger.id }}' variable contains the key_code of the pressed button)
+      selector:
+        action:
+      default: []
+
+    l2_action:
+      name: L2 button action
+      description: Action to run when L2 is pressed (key_code 38)
+      selector:
+        action:
+      default: []
+
+    l_action:
+      name: L button action
+      description: Action to run when L is pressed (key_code 37)
+      selector:
+        action:
+      default: []
+
+    dpad_left_action:
+      name: D-pad left action
+      description: Action to run when D-pad left is pressed (key_code 18)
+      selector:
+        action:
+      default: []
+
+    dpad_up_action:
+      name: D-pad up action
+      description: Action to run when D-pad up is pressed (key_code 46)
+      selector:
+        action:
+      default: []
+
+    dpad_right_action:
+      name: D-pad right action
+      description: Action to run when D-pad right is pressed (key_code 39)
+      selector:
+        action:
+      default: []
+
+    dpad_down_action:
+      name: D-pad down action
+      description: Action to run when D-pad down is pressed (key_code 32)
+      selector:
+        action:
+      default: []
+
+    star_action:
+      name: Star button action
+      description: Action to run when Star is pressed (key_code 57)
+      selector:
+        action:
+      default: []
+
+    r2_action:
+      name: R2 button action
+      description: Action to run when R2 is pressed (key_code 19)
+      selector:
+        action:
+      default: []
+
+    r_action:
+      name: R button action
+      description: Action to run when R is pressed (key_code 50)
+      selector:
+        action:
+      default: []
+
+    plus_action:
+      name: Plus (+) button action
+      description: Action to run when + is pressed (key_code 24)
+      selector:
+        action:
+      default: []
+
+    x_action:
+      name: X button action
+      description: Action to run when X is pressed (key_code 35)
+      selector:
+        action:
+      default: []
+
+    a_action:
+      name: A button action
+      description: Action to run when A is pressed (key_code 34)
+      selector:
+        action:
+      default: []
+
+    y_action:
+      name: Y button action
+      description: Action to run when Y is pressed (key_code 23)
+      selector:
+        action:
+      default: []
+
+    b_action:
+      name: B button action
+      description: Action to run when B is pressed (key_code 34)
+      selector:
+        action:
+      default: []
+
+    logo_action:
+      name: Logo bottom button action
+      description: Action to run when logo button is pressed (key_code 31)
+      selector:
+        action:
+      default: []
+
+    right_bottom_action:
+      name: Right bottom button action
+      description: Action to run when right bottom button is pressed (key_code 31)
+      selector:
+        action:
+      default: []
+
+trigger:
+  - id: l2
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 38
+
+  - id: l
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 37
+
+  - id: dpad_left
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 18
+
+  - id: dpad_up
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 46
+
+  - id: dpad_right
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 33
+
+  - id: dpad_down
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 32
+
+  - id: star
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 57
+
+  - id: r2
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 19
+
+  - id: r
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 50
+
+  - id: plus
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 24
+
+  - id: x
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 35
+
+  - id: a
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 34
+
+  - id: y
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 23
+
+  - id: b
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 36
+
+  - id: logo
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 31
+
+condition: []
+action:
+  - sequence: !input any_key_action
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: l2
+        sequence: !input l2_action
+      - conditions:
+          - condition: trigger
+            id: l
+        sequence: !input l_action
+      - conditions:
+          - condition: trigger
+            id: dpad_left
+        sequence: !input dpad_left_action
+      - conditions:
+          - condition: trigger
+            id: dpad_up
+        sequence: !input dpad_up_action
+      - conditions:
+          - condition: trigger
+            id: dpad_right
+        sequence: !input dpad_right_action
+      - conditions:
+          - condition: trigger
+            id: dpad_down
+        sequence: !input dpad_down_action
+      - conditions:
+          - condition: trigger
+            id: star
+        sequence: !input star_action
+      - conditions:
+          - condition: trigger
+            id: star
+        sequence: !input star_action
+      - conditions:
+          - condition: trigger
+            id: r2
+        sequence: !input r2_action
+      - conditions:
+          - condition: trigger
+            id: r
+        sequence: !input r_action
+      - conditions:
+          - condition: trigger
+            id: plus
+        sequence: !input plus_action
+      - conditions:
+          - condition: trigger
+            id: x
+        sequence: !input x_action
+      - conditions:
+          - condition: trigger
+            id: a
+        sequence: !input a_action
+      - conditions:
+          - condition: trigger
+            id: y
+        sequence: !input y_action
+      - conditions:
+          - condition: trigger
+            id: b
+        sequence: !input b_action
+      - conditions:
+          - condition: trigger
+            id: logo
+        sequence: !input logo_action
+    default: []
