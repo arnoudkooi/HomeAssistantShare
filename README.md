@@ -26,6 +26,19 @@ Professional remote control for XP-Pen ACK05 devices with support for complex mu
 
 ## [Details](./blueprints/xp-pen/)
 
+### 🎮 [8BitDo Micro Remote Control](./blueprints/8bitdomicro/)
+A flexible remote control blueprint for the 8BitDo Micro gamepad, supporting per-button actions and portrait/landscape orientation mapping.
+
+**Features:**
+- ✅ Complete support for all main buttons and D-pad directions
+- ✅ Individual actions for each button (custom automations)
+- ✅ Portrait and landscape orientation mapping (customizable)
+- ✅ Easy integration with Home Assistant's keyboard_remote
+- ✅ Example mappings for media, smart home, and scene control
+- ✅ Catch-all action for generic key mapping (handle any button press)
+
+## [Details](./blueprints/8bitdomicro/)
+
 ## 🚀 Getting Started
 
 ### Quick Import
