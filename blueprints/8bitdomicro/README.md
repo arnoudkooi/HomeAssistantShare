@@ -127,20 +127,18 @@ any_key_action:
         {% elif trigger.id == 'DPAD_RIGHT' %} DOWN
         {% elif trigger.id == 'DPAD_DOWN' %} LEFT
         {% elif trigger.id == 'DPAD_LEFT' %} UP
+        {% elif trigger.id == 'STAR' %} BACK
+        {% elif trigger.id == 'MINUS' %} OK
+        {% elif trigger.id == 'LOGO' %} HOME
         {% elif trigger.id == 'A' %} OK
-        {% elif trigger.id == 'B' %} BACK
-        {% elif trigger.id == 'X' %} MENU
-        {% elif trigger.id == 'Y' %} INFO
-        {% elif trigger.id == 'L' %} VOLUME_DOWN
-        {% elif trigger.id == 'R' %} VOLUME_UP
-        {% elif trigger.id == 'L2' %} CHANNEL_DOWN
+        {% elif trigger.id == 'B' %} OK
+        {% elif trigger.id == 'X' %} OK
+        {% elif trigger.id == 'Y' %} OK
+        {% elif trigger.id == 'L2' %} VOLUME_DOWN
+        {% elif trigger.id == 'L' %} VOLUME_UP
+        {% elif trigger.id == 'R' %} CHANNEL_DOWN
         {% elif trigger.id == 'R2' %} CHANNEL_UP
-        {% elif trigger.id == 'PLUS' %} PLAY_PAUSE
-        {% elif trigger.id == 'MINUS' %} MUTE
-        {% elif trigger.id == 'STAR' %} STAR
-        {% elif trigger.id == 'RIGHT_BOTTOM' %} HOME
-        {% elif trigger.id == 'LOGO' %} POWER
-        {% else %} UNKNOWN
+        {% elif trigger.id == 'PLUS' %} HOME
         {% endif %}
 ```
 
