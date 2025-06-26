@@ -138,7 +138,7 @@ blueprint:
       default: []
 
 trigger:
-  - id: l2
+  - id: L2
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -146,7 +146,7 @@ trigger:
       type: key_down
       key_code: 38
 
-  - id: l
+  - id: L
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -154,7 +154,7 @@ trigger:
       type: key_down
       key_code: 37
 
-  - id: dpad_left
+  - id: DPAD_LEFT
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -162,7 +162,7 @@ trigger:
       type: key_down
       key_code: 18
 
-  - id: dpad_up
+  - id: DPAD_UP
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -170,7 +170,7 @@ trigger:
       type: key_down
       key_code: 46
 
-  - id: dpad_right
+  - id: DPAD_RIGHT
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -178,7 +178,7 @@ trigger:
       type: key_down
       key_code: 33
 
-  - id: dpad_down
+  - id: DPAD_DOWN
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -186,7 +186,7 @@ trigger:
       type: key_down
       key_code: 32
 
-  - id: star
+  - id: STAR
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -194,7 +194,7 @@ trigger:
       type: key_down
       key_code: 57
 
-  - id: r2
+  - id: R2
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -202,7 +202,7 @@ trigger:
       type: key_down
       key_code: 19
 
-  - id: r
+  - id: R
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -210,7 +210,7 @@ trigger:
       type: key_down
       key_code: 50
 
-  - id: plus
+  - id: PLUS
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -218,7 +218,7 @@ trigger:
       type: key_down
       key_code: 24
 
-  - id: x
+  - id: X
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -226,7 +226,7 @@ trigger:
       type: key_down
       key_code: 35
 
-  - id: a
+  - id: A
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -234,7 +234,7 @@ trigger:
       type: key_down
       key_code: 34
 
-  - id: y
+  - id: Y
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -242,7 +242,7 @@ trigger:
       type: key_down
       key_code: 23
 
-  - id: b
+  - id: B
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -250,7 +250,7 @@ trigger:
       type: key_down
       key_code: 36
 
-  - id: logo
+  - id: LOGO
     platform: event
     event_type: keyboard_remote_command_received
     event_data:
@@ -264,66 +264,66 @@ action:
   - choose:
       - conditions:
           - condition: trigger
-            id: l2
+            id: L2
         sequence: !input l2_action
       - conditions:
           - condition: trigger
-            id: l
+            id: L
         sequence: !input l_action
       - conditions:
           - condition: trigger
-            id: dpad_left
+            id: DPAD_LEFT
         sequence: !input dpad_left_action
       - conditions:
           - condition: trigger
-            id: dpad_up
+            id: DPAD_UP
         sequence: !input dpad_up_action
       - conditions:
           - condition: trigger
-            id: dpad_right
+            id: DPAD_RIGHT
         sequence: !input dpad_right_action
       - conditions:
           - condition: trigger
-            id: dpad_down
+            id: DPAD_DOWN
         sequence: !input dpad_down_action
       - conditions:
           - condition: trigger
-            id: star
+            id: STAR
         sequence: !input star_action
       - conditions:
           - condition: trigger
-            id: star
+            id: STAR
         sequence: !input star_action
       - conditions:
           - condition: trigger
-            id: r2
+            id: R2
         sequence: !input r2_action
       - conditions:
           - condition: trigger
-            id: r
+            id: R
         sequence: !input r_action
       - conditions:
           - condition: trigger
-            id: plus
+            id: PLUS
         sequence: !input plus_action
       - conditions:
           - condition: trigger
-            id: x
+            id: X
         sequence: !input x_action
       - conditions:
           - condition: trigger
-            id: a
+            id: A
         sequence: !input a_action
       - conditions:
           - condition: trigger
-            id: y
+            id: Y
         sequence: !input y_action
       - conditions:
           - condition: trigger
-            id: b
+            id: B
         sequence: !input b_action
       - conditions:
           - condition: trigger
-            id: logo
+            id: LOGO
         sequence: !input logo_action
     default: []
