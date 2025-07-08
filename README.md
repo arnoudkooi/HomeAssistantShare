@@ -39,6 +39,8 @@ A flexible remote control blueprint for the 8BitDo Micro gamepad, supporting per
 
 ## [Details](./blueprints/8bitdomicro/)
 
+### ⌨️ [Macropad 12-Key 2-Knob Remote Control](./blueprints/macropad12key2knob/)
+
 ## 🚀 Getting Started
 
 ### Quick Import

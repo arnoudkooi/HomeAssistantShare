@@ -6,7 +6,7 @@ blueprint:
     
     ![8BitDo Micro Layout](https://raw.githubusercontent.com/arnoudkooi/HomeAssistantShare/main/blueprints/8bitdomicro/8bitdomicro.png)
     
-    The variable `{{ pressed_key }}` will be set to the logical name of the pressed button (e.g., "A", "B", "L2", etc.) for easy mapping to i.e. remote keyboard operations in your automations.
+    The variable `{{ trigger.id }}` will be set to the logical name of the pressed button (e.g., "A", "B", "L2", etc.) for easy mapping to i.e. remote keyboard operations in your automations.
     > **Note:** The ⭐ is default to null, I have remapped this to the space bar (key code 57) in the Ultimate Software app on a mobile device.
 
     

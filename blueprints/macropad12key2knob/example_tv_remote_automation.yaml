@@ -1,0 +1,327 @@
+alias: Macropad CHiQ TV Remote
+description: "TV Remote control using 12-key 2-knob macropad"
+use_blueprint:
+  path: macropad12key2knob/macropad12key2knob.yaml
+  input:
+    device_descriptor: /dev/input/event7
+    key_1_action:
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ state_attr('media_player.remote_chiq_tv', 'app_id') |
+                  string | regex_match('^com\.google\.android\.youtube') }}
+            sequence:
+              - action: remote.send_command
+                data:
+                  command: KEYCODE_MEDIA_NEXT
+                target:
+                  entity_id: remote.remote_chiq_tv
+          - conditions:
+              - condition: not
+                conditions:
+                  - condition: template
+                    value_template: >-
+                      {{ state_attr('media_player.remote_chiq_tv', 'app_id') |
+                      string | regex_match('^com\.mediatek') }}
+            sequence:
+              - action: remote.turn_on
+                target:
+                  entity_id: remote.remote_chiq_tv
+                data:
+                  activity: com.mediatek.wwtv.tvcenter
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ state_attr('media_player.remote_chiq_tv', 'app_id') |
+                  string | regex_match('^com\.mediatek') }}
+            sequence:
+              - action: remote.send_command
+                data:
+                  command: KEYCODE_CHANNEL_UP
+                target:
+                  entity_id: remote.remote_chiq_tv
+    key_2_action:
+      - action: automation.trigger
+        metadata: {}
+        data:
+          skip_condition: true
+        target:
+          entity_id: automation.start_kerkdienst
+    key_3_action:
+      - action: automation.trigger
+        metadata: {}
+        data:
+          skip_condition: true
+        target:
+          entity_id: automation.chiq_tv_youtube_kerk_muziek_via_n8n
+    key_4_action:
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ state_attr('media_player.remote_chiq_tv', 'app_id') |
+                  string | regex_match('^com\.google\.android\.youtube') }}
+            sequence:
+              - action: remote.send_command
+                data:
+                  command: KEYCODE_MEDIA_PREVIOUS
+                target:
+                  entity_id: remote.remote_chiq_tv
+          - conditions:
+              - condition: not
+                conditions:
+                  - condition: template
+                    value_template: >-
+                      {{ state_attr('media_player.remote_chiq_tv', 'app_id') |
+                      string | regex_match('^com\.mediatek') }}
+            sequence:
+              - action: remote.turn_on
+                target:
+                  entity_id: remote.remote_chiq_tv
+                data:
+                  activity: com.mediatek.wwtv.tvcenter
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ state_attr('media_player.remote_chiq_tv', 'app_id') |
+                  string | regex_match('^com\.mediatek') }}
+            sequence: []
+      - action: remote.send_command
+        data:
+          command: KEYCODE_CHANNEL_DOWN
+        target:
+          entity_id: remote.remote_chiq_tv
+    key_5_action:
+      - choose:
+          - conditions:
+              - condition: not
+                conditions:
+                  - condition: template
+                    value_template: >-
+                      {{ state_attr('media_player.remote_chiq_tv', 'app_id') |
+                      string | regex_match('^com\.mediatek') }}
+            sequence:
+              - action: remote.turn_on
+                target:
+                  entity_id: remote.remote_chiq_tv
+                data:
+                  activity: com.mediatek.wwtv.tvcenter
+        default: []
+      - action: media_player.volume_set
+        target:
+          entity_id: media_player.adb_qlic_tv
+        data:
+          volume_level: 0.21
+    key_6_action:
+      - action: remote.turn_on
+        target:
+          entity_id: remote.remote_chiq_tv
+        data:
+          activity: com.ziggo.tv
+    key_7_action:
+      - action: light.toggle
+        metadata: {}
+        data: {}
+        target:
+          entity_id: light.bankstel
+    key_8_action:
+      - choose:
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: media_player.remote_chiq_tv
+                    state: "on"
+                  - condition: state
+                    entity_id: media_player.remote_chiq_tv
+                    state: playing
+            sequence:
+              - action: media_player.turn_off
+                target:
+                  entity_id: media_player.remote_chiq_tv
+                data: {}
+          - conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: media_player.remote_chiq_tv
+                    state: "off"
+                  - condition: state
+                    entity_id: media_player.remote_chiq_tv
+                    state: standby
+            sequence:
+              - action: media_player.turn_on
+                target:
+                  entity_id: media_player.remote_chiq_tv
+                data: {}
+              - delay: "00:00:03"
+              - action: media_player.volume_set
+                target:
+                  entity_id: media_player.adb_qlic_tv
+                data:
+                  volume_level: 0.21
+              - action: remote.turn_on
+                target:
+                  entity_id: remote.remote_chiq_tv
+                data:
+                  activity: com.mediatek.wwtv.tvcenter
+              - delay: "00:00:02"
+              - action: media_player.play_media
+                target:
+                  entity_id: media_player.adb_qlic_tv
+                data:
+                  media_content_type: channel
+                  media_content_id: "5"
+        default:
+          - type: toggle
+            device_id: e22c0603e9b389b6fa9bae6cf6dded77
+            entity_id: 2f4d58e60e12579373db142c3fb780f3
+            domain: remote
+    key_9_action:
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ state_attr('media_player.remote_chiq_tv', 'app_id') |
+                  string | regex_match('^com\.mediatek') }}
+            sequence:
+              - action: remote.send_command
+                data:
+                  command: KEYCODE_LAST_CHANNEL
+                target:
+                  entity_id: remote.remote_chiq_tv
+          - conditions: []
+            sequence:
+              - action: media_player.media_play_pause
+                target:
+                  entity_id: media_player.remote_chiq_tv
+                data: {}
+    key_10_action:
+      - choose:
+          - conditions:
+              - condition: state
+                entity_id: media_player.remote_chiq_tv
+                attribute: is_volume_muted
+                state: true
+            sequence:
+              - action: media_player.volume_mute
+                target:
+                  entity_id: media_player.remote_chiq_tv
+                data:
+                  is_volume_muted: false
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ state_attr('media_player.remote_chiq_tv', 'volume_level')
+                  == 0.21 }}
+              - condition: state
+                entity_id: media_player.adb_qlic_tv
+                attribute: is_volume_muted
+                state: false
+            sequence:
+              - action: media_player.volume_mute
+                target:
+                  entity_id: media_player.remote_chiq_tv
+                data:
+                  is_volume_muted: true
+          - conditions: []
+            sequence:
+              - action: media_player.volume_set
+                target:
+                  entity_id: media_player.adb_qlic_tv
+                data:
+                  volume_level: 0.21
+    key_11_action:
+      # Netflix shortcut
+      - action: remote.turn_on
+        target:
+          entity_id: remote.remote_chiq_tv
+        data:
+          activity: com.netflix.ninja
+    key_12_action:
+      # YouTube shortcut
+      - action: remote.turn_on
+        target:
+          entity_id: remote.remote_chiq_tv
+        data:
+          activity: com.google.android.youtube.tv
+    
+    # Encoder 1 (Left) - Volume Control
+    encoder_1_cw_action:
+      - action: media_player.volume_up
+        metadata: {}
+        data: {}
+        target:
+          entity_id: media_player.remote_chiq_tv
+    encoder_1_ccw_action:
+      - action: media_player.volume_down
+        metadata: {}
+        data: {}
+        target:
+          entity_id: media_player.remote_chiq_tv
+    encoder_1_click_action:
+      # Mute toggle
+      - action: media_player.volume_mute
+        target:
+          entity_id: media_player.remote_chiq_tv
+        data:
+          is_volume_muted: >-
+            {{ not state_attr('media_player.remote_chiq_tv', 'is_volume_muted') }}
+    
+    # Encoder 2 (Right) - Channel/Navigation Control
+    encoder_2_cw_action:
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ state_attr('media_player.remote_chiq_tv', 'app_id') |
+                  string | regex_match('^com\.mediatek') }}
+            sequence:
+              - action: remote.send_command
+                data:
+                  command: KEYCODE_CHANNEL_UP
+                target:
+                  entity_id: remote.remote_chiq_tv
+          - conditions: []
+            sequence:
+              - action: remote.send_command
+                data:
+                  command: KEYCODE_DPAD_RIGHT
+                target:
+                  entity_id: remote.remote_chiq_tv
+    encoder_2_ccw_action:
+      - choose:
+          - conditions:
+              - condition: template
+                value_template: >-
+                  {{ state_attr('media_player.remote_chiq_tv', 'app_id') |
+                  string | regex_match('^com\.mediatek') }}
+            sequence:
+              - action: remote.send_command
+                data:
+                  command: KEYCODE_CHANNEL_DOWN
+                target:
+                  entity_id: remote.remote_chiq_tv
+          - conditions: []
+            sequence:
+              - action: remote.send_command
+                data:
+                  command: KEYCODE_DPAD_LEFT
+                target:
+                  entity_id: remote.remote_chiq_tv
+    encoder_2_click_action:
+      # Enter/Select
+      - action: remote.send_command
+        data:
+          command: KEYCODE_ENTER
+        target:
+          entity_id: remote.remote_chiq_tv
+    
+    # Optional: Global action for any button press
+    any_key_action:
+      - action: input_text.set_value
+        target:
+          entity_id: input_text.robb_4ch_remote_state
+        data:
+          value: "{{ trigger.id }} pressed at {{ now() }}" 

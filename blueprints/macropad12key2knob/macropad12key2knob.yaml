@@ -1,0 +1,391 @@
+blueprint:
+  name: Macropad 12-Key 2-Knob
+  description: >
+    Run different actions for each key and rotary encoder on your 12-key 2-knob macropad. Leave any action blank to skip it.
+    
+    ![Macropad Layout](https://raw.githubusercontent.com/arnoudkooi/HomeAssistantShare/main/blueprints/macropad12key2knob/macropad.png)
+    
+    The device features: 2 rotary encoders (knobs) with clockwise, counter-clockwise, and click functions, and 12 keys arranged in a 4x3 grid.
+    
+    The variable `{{ trigger.id }}` will be set to the logical name of the pressed button or encoder action (e.g., "KEY_1", "KEY_2", "ENCODER_1_CW", "ENCODER_1_CCW", "ENCODER_1_CLICK", etc.) for easy mapping to remote keyboard operations in your automations.
+    
+    **Key Layout:** [ENCODER_1] [ENCODER_2] - [KEY_1] [KEY_2] [KEY_3] [KEY_4] - [KEY_5] [KEY_6] [KEY_7] [KEY_8] - [KEY_9] [KEY_10] [KEY_11] [KEY_12]
+  domain: automation
+  input:
+    device_descriptor:
+      name: Device descriptor
+      description: The `/dev/input/event..` path of your macropad device.
+      selector:
+        text:
+    any_key_action:
+      name: Any key/encoder action
+      description: Action to run on any key press or encoder action (the '{{ trigger.id }}' variable contains the action type)
+      selector:
+        action:
+      default: []
+
+    # Encoder 1 (Left)
+    encoder_1_cw_action:
+      name: Encoder 1 clockwise action
+      description: Action to run when left encoder is rotated clockwise (key_code 115)
+      selector:
+        action:
+      default: []
+
+    encoder_1_ccw_action:
+      name: Encoder 1 counter-clockwise action
+      description: Action to run when left encoder is rotated counter-clockwise (key_code 114)
+      selector:
+        action:
+      default: []
+
+    encoder_1_click_action:
+      name: Encoder 1 click action
+      description: Action to run when left encoder is pressed (key_code 113)
+      selector:
+        action:
+      default: []
+
+    # Encoder 2 (Right)
+    encoder_2_cw_action:
+      name: Encoder 2 clockwise action
+      description: Action to run when right encoder is rotated clockwise (key_code 163)
+      selector:
+        action:
+      default: []
+
+    encoder_2_ccw_action:
+      name: Encoder 2 counter-clockwise action
+      description: Action to run when right encoder is rotated counter-clockwise (key_code 165)
+      selector:
+        action:
+      default: []
+
+    encoder_2_click_action:
+      name: Encoder 2 click action
+      description: Action to run when right encoder is pressed (key_code 164)
+      selector:
+        action:
+      default: []
+
+    # Keys Row 1
+    key_1_action:
+      name: Key 1 action
+      description: Action to run when Key 1 is pressed (key_code 62)
+      selector:
+        action:
+      default: []
+
+    key_2_action:
+      name: Key 2 action
+      description: Action to run when Key 2 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+    key_3_action:
+      name: Key 3 action
+      description: Action to run when Key 3 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+    # Keys Row 2
+    key_4_action:
+      name: Key 4 action
+      description: Action to run when Key 4 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+    key_5_action:
+      name: Key 5 action
+      description: Action to run when Key 5 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+    key_6_action:
+      name: Key 6 action
+      description: Action to run when Key 6 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+    # Keys Row 3
+    key_7_action:
+      name: Key 7 action
+      description: Action to run when Key 7 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+    key_8_action:
+      name: Key 8 action
+      description: Action to run when Key 8 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+    key_9_action:
+      name: Key 9 action
+      description: Action to run when Key 9 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+    # Keys Row 4
+    key_10_action:
+      name: Key 10 action
+      description: Action to run when Key 10 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+    key_11_action:
+      name: Key 11 action
+      description: Action to run when Key 11 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+    key_12_action:
+      name: Key 12 action
+      description: Action to run when Key 12 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+trigger:
+  # Encoder 1 (Left)
+  - id: ENCODER_1_CW
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 115
+
+  - id: ENCODER_1_CCW
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 114
+
+  - id: ENCODER_1_CLICK
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 113
+
+  # Encoder 2 (Right)
+  - id: ENCODER_2_CW
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 163
+
+  - id: ENCODER_2_CCW
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 165
+
+  - id: ENCODER_2_CLICK
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 164
+
+  # Keys Row 1
+  - id: KEY_1
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 62
+
+  - id: KEY_2
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 66
+
+  - id: KEY_3
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 88
+
+  # Keys Row 2
+  - id: KEY_4
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 61
+
+  - id: KEY_5
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 65
+
+  - id: KEY_6
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 87
+
+  # Keys Row 3
+  - id: KEY_7
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 60
+
+  - id: KEY_8
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 64
+
+  - id: KEY_9
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 68
+
+  # Keys Row 4
+  - id: KEY_10
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 59
+
+  - id: KEY_11
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 63
+
+  - id: KEY_12
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 67
+
+condition: []
+action:
+  - sequence: !input any_key_action
+  - choose:
+      # Encoder 1 actions
+      - conditions:
+          - condition: trigger
+            id: ENCODER_1_CW
+        sequence: !input encoder_1_cw_action
+      - conditions:
+          - condition: trigger
+            id: ENCODER_1_CCW
+        sequence: !input encoder_1_ccw_action
+      - conditions:
+          - condition: trigger
+            id: ENCODER_1_CLICK
+        sequence: !input encoder_1_click_action
+
+      # Encoder 2 actions
+      - conditions:
+          - condition: trigger
+            id: ENCODER_2_CW
+        sequence: !input encoder_2_cw_action
+      - conditions:
+          - condition: trigger
+            id: ENCODER_2_CCW
+        sequence: !input encoder_2_ccw_action
+      - conditions:
+          - condition: trigger
+            id: ENCODER_2_CLICK
+        sequence: !input encoder_2_click_action
+
+      # Key actions
+      - conditions:
+          - condition: trigger
+            id: KEY_1
+        sequence: !input key_1_action
+      - conditions:
+          - condition: trigger
+            id: KEY_2
+        sequence: !input key_2_action
+      - conditions:
+          - condition: trigger
+            id: KEY_3
+        sequence: !input key_3_action
+      - conditions:
+          - condition: trigger
+            id: KEY_4
+        sequence: !input key_4_action
+      - conditions:
+          - condition: trigger
+            id: KEY_5
+        sequence: !input key_5_action
+      - conditions:
+          - condition: trigger
+            id: KEY_6
+        sequence: !input key_6_action
+      - conditions:
+          - condition: trigger
+            id: KEY_7
+        sequence: !input key_7_action
+      - conditions:
+          - condition: trigger
+            id: KEY_8
+        sequence: !input key_8_action
+      - conditions:
+          - condition: trigger
+            id: KEY_9
+        sequence: !input key_9_action
+      - conditions:
+          - condition: trigger
+            id: KEY_10
+        sequence: !input key_10_action
+      - conditions:
+          - condition: trigger
+            id: KEY_11
+        sequence: !input key_11_action
+      - conditions:
+          - condition: trigger
+            id: KEY_12
+        sequence: !input key_12_action
+    default: []
