@@ -39,7 +39,7 @@ The `{{ trigger.id }}` variable will contain the logical name of the pressed but
 
 ## Example
 
-See `example_tv_remote_automation.yaml` for a complete TV remote control setup.
+Configure actions for your specific use case, such as media control, smart home scenes, or custom automations.
 
 ## Requirements
 
