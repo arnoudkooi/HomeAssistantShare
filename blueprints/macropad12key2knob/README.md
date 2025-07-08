@@ -44,4 +44,8 @@ Configure actions for your specific use case, such as media control, smart home 
 ## Requirements
 
 - Home Assistant with keyboard_remote integration
-- Physical macropad device connected via USB 
+- Physical macropad device
+
+### Bluetooth Connection
+
+If using Bluetooth, this device requires manual pairing. For detailed Bluetooth setup instructions, see the [Numeric Keypad Blueprint](../numeric-keyboard/README.md#bluetooth-keypad-setup-optional) which includes step-by-step terminal pairing instructions. 
