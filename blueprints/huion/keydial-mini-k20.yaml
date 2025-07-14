@@ -1,0 +1,450 @@
+blueprint:
+  name: Huion Keydial Mini K20
+  description: >
+    Run different actions for each key and rotary encoder on your Huion Keydial Mini K20 device. Leave any action blank to skip it.
+    
+    ![Keydial Mini K20 Layout](https://raw.githubusercontent.com/arnoudkooi/HomeAssistantShare/main/blueprints/huion/keydial-mini-k20.png)
+    
+    The device features: 1 rotary encoder dial with clockwise, counter-clockwise rotation and Key 0 in the center, plus 18 keys arranged in a compact grid layout. Note: This device uses two separate input devices - one for keys and one for dial rotation events.
+    
+    The variable `{{ trigger.id }}` will be set to the logical name of the pressed button or encoder action (e.g., "KEY_0", "KEY_1", "KEY_2", "DIAL_CW", "DIAL_CCW", etc.) for easy mapping to remote keyboard operations in your automations.
+    
+    **Layout:** [DIAL with KEY_0] - [KEY_1] [KEY_2] [KEY_3] [KEY_4] - [KEY_5] [KEY_6] [KEY_7] [KEY_8] - [KEY_9] [KEY_10] [KEY_11] [KEY_12] - [KEY_13] [KEY_14] [KEY_15] [KEY_16] - [KEY_17] [KEY_18]
+  domain: automation
+  input:
+    device_descriptor:
+      name: Keys device descriptor
+      description: The `/dev/input/event..` path for the keys on your Keydial Mini K20 device.
+      selector:
+        text:
+    dial_device_descriptor:
+      name: Dial device descriptor
+      description: The `/dev/input/event..` path for the dial on your Keydial Mini K20 device (usually /dev/input/event10).
+      selector:
+        text:
+    any_key_action:
+      name: Any key/dial action
+      description: Action to run on any key press or dial action (the '{{ trigger.id }}' variable contains the action type)
+      selector:
+        action:
+      default: []
+
+    # Rotary Dial
+    dial_cw_action:
+      name: Dial clockwise action
+      description: Action to run when dial is rotated clockwise
+      selector:
+        action:
+      default: []
+
+    dial_ccw_action:
+      name: Dial counter-clockwise action
+      description: Action to run when dial is rotated counter-clockwise
+      selector:
+        action:
+      default: []
+
+    dial_click_action:
+      name: Key 0 action (dial center)
+      description: Action to run when Key 0 (dial center) is pressed (key_code 164)
+      selector:
+        action:
+      default: []
+
+    # Keys Row 1
+    key_1_action:
+      name: Key 1 action
+      description: Action to run when Key 1 is pressed (key_code 37)
+      selector:
+        action:
+      default: []
+
+    key_2_action:
+      name: Key 2 action
+      description: Action to run when Key 2 is pressed (key_code 34)
+      selector:
+        action:
+      default: []
+
+    key_3_action:
+      name: Key 3 action
+      description: Action to run when Key 3 is pressed (key_code 38)
+      selector:
+        action:
+      default: []
+
+    key_4_action:
+      name: Key 4 action
+      description: Action to run when Key 4 is pressed (key_code 111)
+      selector:
+        action:
+      default: []
+
+    # Keys Row 2
+    key_5_action:
+      name: Key 5 action
+      description: Action to run when Key 5 is pressed (key_code 23)
+      selector:
+        action:
+      default: []
+
+    key_6_action:
+      name: Key 6 action
+      description: Action to run when Key 6 is pressed (key_code 32)
+      selector:
+        action:
+      default: []
+
+    key_7_action:
+      name: Key 7 action
+      description: Action to run when Key 7 is pressed (key_code 48)
+      selector:
+        action:
+      default: []
+
+    key_8_action:
+      name: Key 8 action
+      description: Action to run when Key 8 is pressed (key_code 18)
+      selector:
+        action:
+      default: []
+
+    # Keys Row 3
+    key_9_action:
+      name: Key 9 action
+      description: Action to run when Key 9 is pressed (key_code 31)
+      selector:
+        action:
+      default: []
+
+    key_10_action:
+      name: Key 10 action
+      description: Action to run when Key 10 is pressed (key_code 44)
+      selector:
+        action:
+      default: []
+
+    key_11_action:
+      name: Key 11 action
+      description: Action to run when Key 11 is pressed (key_code 46)
+      selector:
+        action:
+      default: []
+
+    key_12_action:
+      name: Key 12 action
+      description: Action to run when Key 12 is pressed (key_code 47)
+      selector:
+        action:
+      default: []
+
+    # Keys Row 4
+    key_13_action:
+      name: Key 13 action
+      description: Action to run when Key 13 is pressed (key_code 29)
+      selector:
+        action:
+      default: []
+
+    key_14_action:
+      name: Key 14 action
+      description: Action to run when Key 14 is pressed (key_code 56)
+      selector:
+        action:
+      default: []
+
+    key_15_action:
+      name: Key 15 action
+      description: Action to run when Key 15 is pressed (key_code 42)
+      selector:
+        action:
+      default: []
+
+    key_16_action:
+      name: Key 16 action
+      description: Action to run when Key 16 is pressed (key_code 28)
+      selector:
+        action:
+      default: []
+
+    # Keys Row 5
+    key_17_action:
+      name: Key 17 action
+      description: Action to run when Key 17 is pressed (key_code 57)
+      selector:
+        action:
+      default: []
+
+    key_18_action:
+      name: Key 18 action
+      description: Action to run when Key 18 is pressed (key_code 49)
+      selector:
+        action:
+      default: []
+
+trigger:
+  # Dial rotation events
+  - id: DIAL_CW
+    platform: event
+    event_type: dial_rotation
+    event_data:
+      device_descriptor: !input dial_device_descriptor
+      direction: clockwise
+
+  - id: DIAL_CCW
+    platform: event
+    event_type: dial_rotation
+    event_data:
+      device_descriptor: !input dial_device_descriptor
+      direction: counterclockwise
+
+  # Key 0 (dial center)
+  - id: KEY_0
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 164
+
+  # Keys Row 1
+  - id: KEY_1
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 37
+
+  - id: KEY_2
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 34
+
+  - id: KEY_3
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 38
+
+  - id: KEY_4
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 111
+
+  # Keys Row 2
+  - id: KEY_5
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 23
+
+  - id: KEY_6
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 32
+
+  - id: KEY_7
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 48
+
+  - id: KEY_8
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 18
+
+  # Keys Row 3
+  - id: KEY_9
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 31
+
+  - id: KEY_10
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 44
+
+  - id: KEY_11
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 46
+
+  - id: KEY_12
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 47
+
+  # Keys Row 4
+  - id: KEY_13
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 29
+
+  - id: KEY_14
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 56
+
+  - id: KEY_15
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 42
+
+  - id: KEY_16
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 28
+
+  # Keys Row 5
+  - id: KEY_17
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 57
+
+  - id: KEY_18
+    platform: event
+    event_type: keyboard_remote_command_received
+    event_data:
+      device_descriptor: !input device_descriptor
+      type: key_down
+      key_code: 49
+
+condition: []
+action:
+  - sequence: !input any_key_action
+  - choose:
+      # Dial actions
+      - conditions:
+          - condition: trigger
+            id: DIAL_CW
+        sequence: !input dial_cw_action
+      - conditions:
+          - condition: trigger
+            id: DIAL_CCW
+        sequence: !input dial_ccw_action
+      - conditions:
+          - condition: trigger
+            id: KEY_0
+        sequence: !input dial_click_action
+
+      # Key actions
+      - conditions:
+          - condition: trigger
+            id: KEY_1
+        sequence: !input key_1_action
+      - conditions:
+          - condition: trigger
+            id: KEY_2
+        sequence: !input key_2_action
+      - conditions:
+          - condition: trigger
+            id: KEY_3
+        sequence: !input key_3_action
+      - conditions:
+          - condition: trigger
+            id: KEY_4
+        sequence: !input key_4_action
+      - conditions:
+          - condition: trigger
+            id: KEY_5
+        sequence: !input key_5_action
+      - conditions:
+          - condition: trigger
+            id: KEY_6
+        sequence: !input key_6_action
+      - conditions:
+          - condition: trigger
+            id: KEY_7
+        sequence: !input key_7_action
+      - conditions:
+          - condition: trigger
+            id: KEY_8
+        sequence: !input key_8_action
+      - conditions:
+          - condition: trigger
+            id: KEY_9
+        sequence: !input key_9_action
+      - conditions:
+          - condition: trigger
+            id: KEY_10
+        sequence: !input key_10_action
+      - conditions:
+          - condition: trigger
+            id: KEY_11
+        sequence: !input key_11_action
+      - conditions:
+          - condition: trigger
+            id: KEY_12
+        sequence: !input key_12_action
+      - conditions:
+          - condition: trigger
+            id: KEY_13
+        sequence: !input key_13_action
+      - conditions:
+          - condition: trigger
+            id: KEY_14
+        sequence: !input key_14_action
+      - conditions:
+          - condition: trigger
+            id: KEY_15
+        sequence: !input key_15_action
+      - conditions:
+          - condition: trigger
+            id: KEY_16
+        sequence: !input key_16_action
+      - conditions:
+          - condition: trigger
+            id: KEY_17
+        sequence: !input key_17_action
+      - conditions:
+          - condition: trigger
+            id: KEY_18
+        sequence: !input key_18_action
+    default: []

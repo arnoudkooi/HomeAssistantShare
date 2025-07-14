@@ -41,6 +41,8 @@ A flexible remote control blueprint for the 8BitDo Micro gamepad, supporting per
 
 ### ⌨️ [Macropad 12-Key 2-Knob Remote Control](./blueprints/macropad12key2knob/)
 
+### 🎨 [Huion Keydial Mini K20 Remote Control](./blueprints/huion/)
+
 ## 🚀 Getting Started
 
 ### Quick Import
