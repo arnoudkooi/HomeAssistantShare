@@ -159,21 +159,19 @@ action:
 
   # Execute action based on final sequence
   - choose:
+      # Immediate rotation actions (no debouncing delay)
+      - conditions:
+          - "{{ current_sequence | join(',') == '29,74' }}"
+        sequence: !input rotate_cw_action
+      - conditions:
+          - "{{ current_sequence | join(',') == '29,78' }}"
+        sequence: !input rotate_ccw_action
+      
       # Three-key sequence
       - conditions:
           - "{{ should_execute }}"
           - "{{ final_state.sequence | join(',') == '29,42,44' }}"
         sequence: !input K10_action
-      
-      # Two-key sequences starting with 29
-      - conditions:
-          - "{{ should_execute }}"
-          - "{{ final_state.sequence | join(',') == '29,74' }}"
-        sequence: !input rotate_cw_action
-      - conditions:
-          - "{{ should_execute }}"
-          - "{{ final_state.sequence | join(',') == '29,78' }}"
-        sequence: !input rotate_ccw_action
       - conditions:
           - "{{ should_execute }}"
           - "{{ final_state.sequence | join(',') == '29,24' }}"
@@ -194,10 +192,6 @@ action:
       # Single key presses
       - conditions:
           - "{{ should_execute }}"
-          - "{{ final_state.sequence | join(',') == '29' }}"
-        sequence: !input K5_action
-      - conditions:
-          - "{{ should_execute }}"
           - "{{ final_state.sequence | join(',') == '42' }}"
         sequence: !input K4_action
       - conditions:
@@ -212,3 +206,9 @@ action:
           - "{{ should_execute }}"
           - "{{ final_state.sequence | join(',') == '63' }}"
         sequence: !input K3_action
+      
+      # K5 (key 29 standalone) - placed last to avoid interfering with rotation sequences
+      - conditions:
+          - "{{ should_execute }}"
+          - "{{ final_state.sequence | join(',') == '29' }}"
+        sequence: !input K5_action
